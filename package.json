@@ -16,10 +16,11 @@
     "url": "https://github.com/tjadenad/chess-stride"
   },
   "bugs": "",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
+    "chess.js": "^0.10.2",
+    "node": "^10.8.0",
+    "npm": "^6.4.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
