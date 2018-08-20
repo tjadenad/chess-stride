@@ -29,12 +29,9 @@ bad = ['[Event "Lets Play!"]',
     '[WhiteElo "907"]',
     '[BlackElo "965"]',
     '[TimeControl "1 in 3 days"]',
-    '[SetUp "1"]',
+    '[SetUp "0"]', // SetUp 1 fails
     '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6 Nxf6',
-    '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 12. Nfg5 Bg4 13. f3 Bf5',
-    '14. Nc4 Qb5 15. a4 Qxc4 16. dxc4 h6 17. Qe2+ Be7 18. g4 Nb4 19. Bxb4',
-    'cxb4 20. Qe5 Bd7 21. Qxd4 hxg5 22. Qb6 Be6 23. Rd1 Rc8 24. Qxb7 Kf7',
-    '25. Qxa6 Bxc4 26. Bxc4+ Rxc4 27. Qxc4+ Kg6 28. h4 Rxh4 29. Rxh4 gxh4  *'].join('\n');
+    '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 12. Nfg5'].join('\n');
 
 fixed = ['[Event "Lets Play!"]',
     '[Site "Chess.com"]',
@@ -45,7 +42,7 @@ fixed = ['[Event "Lets Play!"]',
     '[WhiteElo "907"]',
     '[BlackElo "965"]',
     '[TimeControl "1 in 3 days"]',
-    //'[SetUp "1"]', // SetUp fails
+    '[SetUp "0"]', // SetUp 1 fails
     '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6 Nxf6',
     '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 12. Ng5 Bg4 13. f3 Bf5', // 12. Nfg5 fails
     '14. Nc4 Qb5 15. a4 Qxc4 16. dxc4 h6 17. Qe2+ Be7 18. g4 Nb4 19. Bxb4',
@@ -61,6 +58,7 @@ before_bad = ['[Event "Lets Play!"]',
     '[WhiteElo "907"]',
     '[BlackElo "965"]',
     '[TimeControl "1 in 3 days"]',
+    '[SetUp "0"]',
     '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6 Nxf6',
     '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 *'].join('\n');
 
@@ -75,14 +73,32 @@ var options = {
     sloppy: true
 };
 
-console.log('bad with sloppypP: ' + chess.load_pgn(bad, options));
+console.log('bad with sloppy: ' + chess.load_pgn(bad, options));
 console.log('fixed with sloppy: ' + chess.load_pgn(fixed, options));
 
 console.log('loading before_bad: ' + chess.load_pgn(before_bad));
-console.log('move Nfg5: ' + chess.move('Nfg5'));
+console.log('FEN: ' + chess.fen());
+// console.log('move Nfg5: ' + chess.move('Nfg5'));
 console.log('move Nfg5 with sloppy: ' + chess.move('Nfg5', {sloppy: true}));
-console.log('move Ng5: ' + JSON.stringify(chess.move('Ng5')));
-console.log(chess.ascii());
-console.log();
-console.log('loading before_bad: ' + chess.load_pgn(before_bad));
-console.log('move from f3 to g5: ' + JSON.stringify(chess.move({from: 'f3', to: 'g5'})));
+// console.log('move Ng5: ' + JSON.stringify(chess.move('Ng5')));
+console.log('FEN: ' + chess.fen());
+// console.log(chess.ascii());
+// console.log();
+// console.log('loading before_bad: ' + chess.load_pgn(before_bad));
+// console.log('move from f3 to g5: ' + JSON.stringify(chess.move({from: 'f3', to: 'g5'})));
+//
+// console.log('pgn format for after successful move: ' + chess.pgn());
+// console.log('loading pgn after move: ' + chess.load_pgn(chess.pgn()));
+//
+// newline_char = '\\[';
+// var header = [
+// '[BlackElo "965"]',
+// '[TimeControl "1 in 3 days"]'
+// //'[SetUp "1"]', // SetUp fails
+// ].join(newline_char);
+// function mask(str) {
+//   return str.replace(/\\/g, '\\');
+// }
+// console.log(newline_char);
+// console.log(mask(newline_char));
+// console.log(header.split(new RegExp(mask(newline_char))));
