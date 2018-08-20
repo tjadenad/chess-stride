@@ -1,4 +1,5 @@
-var Chess = require('chess.js').Chess;
+// test
+
 var chess = new Chess();
 
 example = ['[Event "Casual Game"]',
@@ -30,6 +31,7 @@ bad = ['[Event "Lets Play!"]',
     '[BlackElo "965"]',
     '[TimeControl "1 in 3 days"]',
     '[SetUp "0"]', // SetUp 1 fails
+    '',
     '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6 Nxf6',
     '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 12. Nfg5'].join('\n');
 
@@ -43,6 +45,7 @@ fixed = ['[Event "Lets Play!"]',
     '[BlackElo "965"]',
     '[TimeControl "1 in 3 days"]',
     '[SetUp "0"]', // SetUp 1 fails
+    '',
     '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6 Nxf6',
     '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 12. Ng5 Bg4 13. f3 Bf5', // 12. Nfg5 fails
     '14. Nc4 Qb5 15. a4 Qxc4 16. dxc4 h6 17. Qe2+ Be7 18. g4 Nb4 19. Bxb4',
@@ -58,16 +61,17 @@ before_bad = ['[Event "Lets Play!"]',
     '[WhiteElo "907"]',
     '[BlackElo "965"]',
     '[TimeControl "1 in 3 days"]',
-    '[SetUp "0"]',
+    '',
     '1. e4 e6 2. d3 c5 3. c4 d5 4. cxd5 exd5 5. e5 Nc6 6. Nf3 f6 7. exf6 Nxf6',
     '8. Nc3 d4 9. Nb5 a6 10. Na3 Qa5+ 11. Bd2 Qb6 *'].join('\n');
-
 
 console.log('example: ' + chess.load_pgn(example));
 
 console.log('bad: ' + chess.load_pgn(bad));
 
 console.log('fixed: ' + chess.load_pgn(fixed));
+
+console.log('before_bad: ' + chess.load_pgn(before_bad));
 
 var options = {
     sloppy: true
@@ -76,10 +80,10 @@ var options = {
 console.log('bad with sloppy: ' + chess.load_pgn(bad, options));
 console.log('fixed with sloppy: ' + chess.load_pgn(fixed, options));
 
-console.log('loading before_bad: ' + chess.load_pgn(before_bad));
+console.log('before_bad with sloppy: ' + chess.load_pgn(before_bad, options));
 console.log('FEN: ' + chess.fen());
 // console.log('move Nfg5: ' + chess.move('Nfg5'));
-console.log('move Nfg5 with sloppy: ' + chess.move('Nfg5', {sloppy: true}));
+console.log('move Nfg5 with sloppy: ' + JSON.stringify(chess.move('Nfg5', {sloppy: true})));
 // console.log('move Ng5: ' + JSON.stringify(chess.move('Ng5')));
 console.log('FEN: ' + chess.fen());
 // console.log(chess.ascii());
